@@ -1,0 +1,10 @@
+# Ignore build output folders in Backend
+obj/
+bin/
+
+# Ignore user-specific project files in Backend
+*.csproj.user
+
+# Ignore sensitive configuration files in Backend
+appsettings.json
+appsettings.Development.json
