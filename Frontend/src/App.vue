@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { RouterLink, RouterView, useRoute} from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
 import pdfPath from '@/assets/Callum_Carter-Begbie_CV.pdf';
 
 const isDropdownOpen = ref(false);
 const openPdf = () => {
   window.open(pdfPath, '_blank');
+};
+
+const closeDropdown = () => {
+  isDropdownOpen.value = false;
 };
 </script>
 
@@ -15,8 +19,8 @@ const openPdf = () => {
       <header class="bg-cz-background-800 pt-5px pb-3 px-20px">
         <div>
           <nav class="flex items-center justify-between">
-            <RouterLink to="/"
-              class="text-cz-red-800 text-6xl lg:text-6xl font-bold no-underline hover:brightness-110">
+            <RouterLink to="/" class="text-cz-red-800 text-6xl lg:text-6xl font-bold no-underline hover:brightness-110"
+              @click="closeDropdown">
               Caz</RouterLink>
 
             <div class="md:hidden">
@@ -33,59 +37,47 @@ const openPdf = () => {
             <div class="hidden md:flex flex-grow justify-center">
               <div class="flex space-x-8">
                 <RouterLink to="/" class="text-white lg:text-xl hover:text-cz-red-100"
-                active-class="!text-cz-red-500 !hover:text-cz-red-700"
-                exact-active-class="!text-cz-red-500 !hover:text-cz-red-700"
-                >Home</RouterLink>
+                  active-class="!text-cz-red-500 !hover:text-cz-red-700"
+                  exact-active-class="!text-cz-red-500 !hover:text-cz-red-700">Home</RouterLink>
                 <RouterLink to="/tech" class="text-white lg:text-xl hover:text-cz-red-100"
-                active-class="!text-cz-red-500 hover:text-cz-red-700"
-                exact-active-class="!text-cz-red-500 hover:text-cz-red-700"
-                >Tech</RouterLink>
+                  active-class="!text-cz-red-500 hover:text-cz-red-700"
+                  exact-active-class="!text-cz-red-500 hover:text-cz-red-700">Tech</RouterLink>
                 <RouterLink to="/auto" class="text-white lg:text-xl hover:text-cz-red-100"
-                active-class="!text-cz-red-500 hover:text-cz-red-700"
-                exact-active-class="!text-cz-red-500 hover:text-cz-red-700"
-                >Auto</RouterLink>
+                  active-class="!text-cz-red-500 hover:text-cz-red-700"
+                  exact-active-class="!text-cz-red-500 hover:text-cz-red-700">Auto</RouterLink>
                 <RouterLink to="/models" class="text-white lg:text-xl hover:text-cz-red-100"
-                active-class="!text-cz-red-500 hover:text-cz-red-700"
-                exact-active-class="!text-cz-red-500 hover:text-cz-red-700"
-                >Models</RouterLink>
+                  active-class="!text-cz-red-500 hover:text-cz-red-700"
+                  exact-active-class="!text-cz-red-500 hover:text-cz-red-700">Models</RouterLink>
                 <button @click="openPdf" class="text-white lg:text-xl hover:text-cz-red-100">CV</button>
               </div>
             </div>
-            <RouterLink to="/contact-me" class="hidden md:block text-cz-red-50 lg:text-xl bg-cz-red-950 border-cz-red-900 border rounded-lg px-3 py-2 hover:brightness-110"
-            >Contact Me</RouterLink>
+            <RouterLink to="/contact-me"
+              class="hidden md:block text-cz-red-50 lg:text-xl bg-cz-red-950 border-cz-red-900 border rounded-lg px-3 py-2 hover:brightness-110">
+              Contact Me</RouterLink>
           </nav>
 
           <!-- Dropdown Menu for Mobile -->
-          <div v-if="isDropdownOpen" class="absolute top-16 left-0 w-full bg-cz-background-800 mt-2 rounded-lg shadow-lg z-50">
+          <div v-if="isDropdownOpen"
+            class="absolute top-16 left-0 w-full bg-cz-background-800 mt-2 rounded-lg shadow-lg z-50">
             <div class="flex flex-col space-y-4 p-4">
-              <RouterLink to="/" class="text-white"
-              active-class="!text-cz-red-500"
-              exact-active-class="!text-cz-red-500"
-              >Home</RouterLink>
-              <RouterLink to="/tech" class="text-white"
-              active-class="!text-cz-red-500"
-              exact-active-class="!text-cz-red-500"
-              >Tech</RouterLink>
-              <RouterLink to="/auto" class="text-white"
-              active-class="!text-cz-red-500"
-              exact-active-class="!text-cz-red-500"
-              >Auto</RouterLink>
-              <RouterLink to="/models" class="text-white"
-              active-class="!text-cz-red-500"
-              exact-active-class="!text-cz-red-500"
-              >Models</RouterLink>
+              <RouterLink to="/" class="text-white" active-class="!text-cz-red-500"
+                exact-active-class="!text-cz-red-500" @click="closeDropdown">Home</RouterLink>
+              <RouterLink to="/tech" class="text-white" active-class="!text-cz-red-500"
+                exact-active-class="!text-cz-red-500" @click="closeDropdown">Tech</RouterLink>
+              <RouterLink to="/auto" class="text-white" active-class="!text-cz-red-500"
+                exact-active-class="!text-cz-red-500" @click="closeDropdown">Auto</RouterLink>
+              <RouterLink to="/models" class="text-white" active-class="!text-cz-red-500"
+                exact-active-class="!text-cz-red-500" @click="closeDropdown">Models</RouterLink>
               <a href="javascript:void(0)" @click="openPdf" class="text-white">CV</a>
-              <RouterLink to="/contact-me" class="text-white"
-              active-class="!text-cz-red-500"
-              exact-active-class="!text-cz-red-500"
-              >Contact Me</RouterLink>
+              <RouterLink to="/contact-me" class="text-white" active-class="!text-cz-red-500"
+                exact-active-class="!text-cz-red-500" @click="closeDropdown">Contact Me</RouterLink>
             </div>
           </div>
         </div>
       </header>
     </div>
 
-    <main>
+    <main class="p-5 md:px-40 md:py-20">
       <RouterView />
     </main>
   </div>
