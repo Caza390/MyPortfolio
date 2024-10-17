@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\wwwroot\\swagger-dark-theme.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:wwwroot\\swagger-dark-theme.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\controllers\\cagegoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:controllers\\cagegoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\controllers\\cagegoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:controllers\\cagegoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,11 +38,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAgAAAAAAAAAAADwvyMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-17T22:49:22.07Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -52,27 +65,14 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAuwCYAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAwDAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-17T22:07:32.9Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "swagger-dark-theme.css",
-              "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\wwwroot\\swagger-dark-theme.css",
-              "RelativeDocumentMoniker": "wwwroot\\swagger-dark-theme.css",
-              "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\wwwroot\\swagger-dark-theme.css",
-              "RelativeToolTip": "wwwroot\\swagger-dark-theme.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-10-17T22:06:20.914Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CagegoriesController.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\CagegoriesController.cs",
               "RelativeDocumentMoniker": "Controllers\\CagegoriesController.cs",
@@ -80,12 +80,11 @@
               "RelativeToolTip": "Controllers\\CagegoriesController.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAAADEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T23:03:51.831Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T23:03:51.831Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Category.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\Category.cs",
               "RelativeDocumentMoniker": "Models\\Category.cs",
@@ -106,8 +105,7 @@
               "RelativeToolTip": "Models\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-06T00:35:20.866Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-06T00:35:20.866Z"
             },
             {
               "$type": "Document",

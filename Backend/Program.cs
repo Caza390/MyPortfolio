@@ -13,7 +13,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontendDev",
         builder =>
         {
-            builder.WithOrigins("http://localhost:5173") // Your frontend's local URL
+            builder.WithOrigins("http://localhost:5173", "http://192.168.1.90:5173") // Your frontend's local URL
                    .AllowAnyHeader()
                    .AllowAnyMethod()
                    .AllowCredentials(); // Allow cookies, if needed
