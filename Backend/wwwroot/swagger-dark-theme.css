@@ -1,0 +1,24 @@
+﻿body {
+    background-color: #1e1e1e !important;
+    color: #f0f0f0 !important;
+}
+
+.swagger-ui .topbar {
+    background-color: #333 !important;
+}
+
+.swagger-ui .opblock-summary {
+    background-color: #333 !important;
+    color: #fff !important;
+}
+
+.swagger-ui .opblock {
+    background-color: #292929 !important;
+}
+
+.swagger-ui .btn {
+    background-color: #444 !important;
+    color: #fff !important;
+}
+
+/* You can continue to add more rules here */

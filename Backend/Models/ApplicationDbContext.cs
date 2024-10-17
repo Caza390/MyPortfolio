@@ -10,5 +10,6 @@ namespace Backend.Models
         }
 
         public DbSet<ToDo> ToDos { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
