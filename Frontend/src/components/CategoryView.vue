@@ -20,7 +20,7 @@ const error = ref('');
 const fetchCategoryData = async () => {
   loading.value = true;
   try {
-    const response = await fetch(`http://localhost:5176/api/categories/byname/${categoryName.value}`);
+    const response = await fetch(`http://192.168.1.90:5176/api/categories/byname/${categoryName.value}`);
     if (!response.ok) {
       throw new Error('Failed to fetch category data');
     }
