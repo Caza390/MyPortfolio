@@ -1,4 +1,5 @@
-﻿using Backend.Models;
+﻿
+using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Models
@@ -9,7 +10,6 @@ namespace Backend.Models
         {
         }
 
-        public DbSet<ToDo> ToDos { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<TabsDb> Tabs { get; set; }
     }
 }

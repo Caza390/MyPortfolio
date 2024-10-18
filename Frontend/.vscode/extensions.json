@@ -1,7 +1,5 @@
 {
   "recommendations": [
-    "Vue.volar",
-    "pirulug.intellisense-bootstrap-5-by-pirulug",
-    "hossaini.bootstrap-intellisense"
+    "Vue.volar"
   ]
 }
