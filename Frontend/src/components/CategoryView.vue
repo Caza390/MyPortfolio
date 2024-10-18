@@ -11,7 +11,7 @@ interface Category {
 }
 
 const route = useRoute();
-const categoryName = ref(route.params.category ? String(route.params.category).toLowerCase() : '');
+const categoryUrl = ref(route.params.category ? String(route.params.category) : ''); // Change variable to categoryUrl
 const categoryData = ref<Category | null>(null); // Use the Category interface
 const loading = ref(true);
 const error = ref('');
@@ -20,12 +20,12 @@ const error = ref('');
 const fetchCategoryData = async () => {
   loading.value = true;
   try {
-    const response = await fetch(`http://192.168.1.90:5176/api/categories/byname/${categoryName.value}`);
+    const response = await fetch(`http://192.168.1.90:5176/api/categories/byurl/${categoryUrl.value}`);
     if (!response.ok) {
       throw new Error('Failed to fetch category data');
     }
     categoryData.value = await response.json();
-  } catch (err: any) { // Explicitly assert err as any
+  } catch (err: any) {
     error.value = err.message;
     loading.value = false;
   }
@@ -37,7 +37,7 @@ onMounted(() => {
 
 // Watch for changes in the route parameter
 watch(() => route.params.category, (newCategory) => {
-  categoryName.value = newCategory ? String(newCategory).toLowerCase() : '';
+  categoryUrl.value = newCategory ? String(newCategory) : ''; // Change to categoryUrl
   fetchCategoryData();
 });
 </script>
@@ -47,7 +47,7 @@ watch(() => route.params.category, (newCategory) => {
     <div v-if="error" class="text-red-500">{{ error }}</div>
     
     <div v-if="categoryData">
-      <h1 class="text-white text-3xl">{{ categoryName }}</h1>
+      <h1 class="text-white text-3xl">{{ categoryData.name }}</h1>
       <p class="text-gray-300">{{ categoryData.description }}</p>
     </div>
   </main>

@@ -36,16 +36,14 @@ namespace Backend.Controllers
             return category;
         }
 
-        [HttpGet("byname/{name}")]
-        public async Task<ActionResult<Category>> GetCategoryByName(string name)
+        [HttpGet("byurl/{url}")]
+        public async Task<IActionResult> GetCategoryByUrl(string url)
         {
-            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
-
+            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Url == url);
             if (category == null)
             {
                 return NotFound();
             }
-
             return Ok(category);
         }
 
