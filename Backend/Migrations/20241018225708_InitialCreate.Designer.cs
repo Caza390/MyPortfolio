@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241007211950_InitialCreate")]
+    [Migration("20241018225708_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,24 +24,29 @@ namespace Backend.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Backend.Models.ToDo", b =>
+            modelBuilder.Entity("Backend.Models.TabsDb", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ID"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("ID");
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.ToTable("ToDos");
+                    b.HasKey("Id");
+
+                    b.ToTable("Tabs");
                 });
 #pragma warning restore 612, 618
         }
