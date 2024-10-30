@@ -17,13 +17,15 @@ namespace Backend.Controllers
             _context = context;
         }
 
-        [HttpGet("All")]
+        [HttpGet("AllTabs")]
         public async Task<ActionResult<IEnumerable<TabsDb>>> GetTabs()
         {
             return await _context.Tabs.ToListAsync();
+
         }
 
-        [HttpGet("Id")]
+
+        [HttpGet("TabId")]
         public async Task<ActionResult<TabsDb>> GetTabs(int id)
         {
             var tabs = await _context.Tabs.FindAsync(id);
@@ -36,7 +38,7 @@ namespace Backend.Controllers
             return tabs;
         }
 
-        [HttpGet("Url")]
+        [HttpGet("TabsUrl")]
         public async Task<IActionResult> GetTabsByUrl(string url)
         {
             var tabs = await _context.Tabs.FirstOrDefaultAsync(c => c.Url == url);
@@ -47,19 +49,19 @@ namespace Backend.Controllers
             return Ok(tabs);
         }
 
-        [HttpPost("Add")]
-        public async Task<ActionResult<TabsDb>> AddTabs(string name, string description, string url)
+        [HttpPost("AddTab")]
+        public async Task<ActionResult<TabsDb>> AddTabs(string title, string subtitle, string url)
         {
 
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(url))
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(subtitle) || string.IsNullOrEmpty(url))
             {
-                return BadRequest("Name and Description are required.");
+                return BadRequest("Please fill all boxes");
             }
 
             var newTabs = new TabsDb
             {
-                Name = name,
-                Description = description,
+                Title = title,
+                Subtitle = subtitle,
                 Url = url
             };
 
@@ -69,8 +71,8 @@ namespace Backend.Controllers
             return CreatedAtAction(nameof(GetTabs), new { id = newTabs.Id }, newTabs);
         }
 
-        [HttpPut("EditName")]
-        public async Task<IActionResult> EditName(int id, string name)
+        [HttpPut("EditTabTitle")]
+        public async Task<IActionResult> EditTitle(int id, string title)
         {
             var tabs = await _context.Tabs.FindAsync(id);
 
@@ -79,9 +81,9 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            if (!string.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(title))
             {
-                tabs.Name = name;
+                tabs.Title = title;
             }
 
             await _context.SaveChangesAsync();
@@ -90,8 +92,8 @@ namespace Backend.Controllers
 
         }
 
-        [HttpPut("EditDescription")]
-        public async Task<IActionResult> EditDescription(int id, string description)
+        [HttpPut("EditTabSubtitle")]
+        public async Task<IActionResult> EditSubtitle(int id, string subtitle)
         {
             var tabs = await _context.Tabs.FindAsync(id);
 
@@ -100,9 +102,9 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            if (!string.IsNullOrEmpty(description))
+            if (!string.IsNullOrEmpty(subtitle))
             {
-                tabs.Description = description;
+                tabs.Subtitle = subtitle;
             }
 
             await _context.SaveChangesAsync();
@@ -111,7 +113,7 @@ namespace Backend.Controllers
 
         }
 
-        [HttpPut("EditUrl")]
+        [HttpPut("EditTabUrl")]
         public async Task<IActionResult> EditUrl(int id, string url)
         {
             var tabs = await _context.Tabs.FindAsync(id);

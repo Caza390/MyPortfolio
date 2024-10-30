@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\models\\categorydb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:models\\categorydb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\controllers\\tabscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:controllers\\tabscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,6 +21,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,38 +43,77 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
+              "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\CategoryController.cs*",
+              "RelativeToolTip": "Controllers\\CategoryController.cs*",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAiwAMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T00:01:26.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CategoryDb.cs",
+              "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\CategoryDb.cs",
+              "RelativeDocumentMoniker": "Models\\CategoryDb.cs",
+              "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\CategoryDb.cs",
+              "RelativeToolTip": "Models\\CategoryDb.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T23:45:48.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "TabsController.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\TabsController.cs",
               "RelativeDocumentMoniker": "Controllers\\TabsController.cs",
               "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\TabsController.cs",
               "RelativeToolTip": "Controllers\\TabsController.cs",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAuwHMAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAwwIkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-16T23:03:51.831Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "TabsDb.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\TabsDb.cs",
               "RelativeDocumentMoniker": "Models\\TabsDb.cs",
               "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\TabsDb.cs",
               "RelativeToolTip": "Models\\TabsDb.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-18T18:37:23.79Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAwwCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-20T17:50:51.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Models\\ApplicationDbContext.cs",
               "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\ApplicationDbContext.cs",
               "RelativeToolTip": "Models\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-06T00:35:20.866Z",
               "EditorCaption": ""

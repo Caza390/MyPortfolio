@@ -20,11 +20,6 @@ const router = createRouter({
       name: 'contact-me',
       component: () => import('../views/ContactMeView.vue')
     },
-    {
-      path: '/todo',
-      name: 'todo',
-      component: () => import('../components/ToDoList.vue')
-    }
   ]
 })
 

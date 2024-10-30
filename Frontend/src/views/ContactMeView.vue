@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-const emailAddress = 'callum.carterbegbie@gmail.com';
+const emailAddress = 'Callum.carterbegbie@gmail.com';
 const emailLink = computed(() => `mailto:${emailAddress}`);
 </script>
 
