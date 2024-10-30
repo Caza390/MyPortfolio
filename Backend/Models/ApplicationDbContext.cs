@@ -11,5 +11,6 @@ namespace Backend.Models
         }
 
         public DbSet<TabsDb> Tabs { get; set; }
+        public DbSet<CategoryDb> Category { get; set; }
     }
 }

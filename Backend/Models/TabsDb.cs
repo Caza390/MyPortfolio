@@ -1,10 +1,12 @@
-﻿namespace Backend.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Backend.Models
 {
     public class TabsDb
     {
         public int Id { get; set; }
-        public required string Name { get; set; }
-        public required string Description { get; set; }
+        public required string Title { get; set; }
+        public required string Subtitle { get; set; }
         public required string Url { get; set; }
     }
 }
