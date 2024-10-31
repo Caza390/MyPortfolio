@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main>
+  <main class="p-5 md:px-40 md:py-20">
     <div class="lg:grid lg:grid-cols-2 items-center">
       <div class="flex justify-center items-center">
         <img src="@/assets/Me.png" alt="me" class="object-contain rounded-full w-full max-w-[500px] h-auto">

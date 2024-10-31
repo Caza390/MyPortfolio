@@ -77,7 +77,7 @@ const closeDropdown = () => {
       </header>
     </div>
 
-    <main class="p-5 md:px-40 md:py-20">
+    <main class="">
       <RouterView />
     </main>
   </div>

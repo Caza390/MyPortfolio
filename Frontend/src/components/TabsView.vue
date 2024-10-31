@@ -75,50 +75,53 @@ watch(() => route.params.tabs, (newTabs) => {
 </script>
 
 <template>
-  <div class="flex">
+
+  <body class="md:flex">
     <!-- Sidebar -->
-    <aside class="w-1-8 p-4 bg-gray-800 text-white">
-      <ul class="space-y-1">
-        <li><button class="font-bold text-xl my-2">Undertaking</button></li>
-        <li><button class="font-bold text-xl my-2">2025</button></li>
-        <li><button class="font-bold text-xl my-2">2024</button></li>
-        <li><button class="font-bold text-xl my-2">2023</button></li>
+    <aside class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white">
+      <ul class="space-y-1 h-full flex flex-col items-center">
+        <li><button class="font-bold text-xl my-2 text-center">Top</button></li>
+        <li><button class="font-bold text-xl my-2 text-center">Undertaking</button></li>
+        <li><button class="font-bold text-xl my-2 text-center">2025</button></li>
+        <li><button class="font-bold text-xl my-2 text-center">2024</button></li>
+        <li><button class="font-bold text-xl my-2 text-center">2023</button></li>
       </ul>
     </aside>
 
+
     <!-- Main Content -->
-    <div class="w-3/4 p-4">
+    <div class="md:w-5/6 p-4">
       <!-- Header with Title and Subtitle -->
-      <header v-if="tabsData" class="mb-6">
-        <h1 class="text-white text-4xl">{{ tabsData.title }}</h1>
-        <p class="text-gray-300">{{ tabsData.subtitle }}</p>
+      <header v-if="tabsData" class="md:mx-40 mb-6 text-center">
+        <h1 class="text-white text-3xl md:text-5xl">{{ tabsData.title }}</h1>
+        <p class="text-gray-300 md:text-lg">{{ tabsData.subtitle }}</p>
       </header>
 
       <!-- Category List -->
-      <main>
+      <main class="md:px-20">
         <div v-if="!loading && categoriesData.length > 0">
           <ul class="space-y-4">
-            <li
-              v-for="category in categoriesData"
-              :key="category.id"
-              class="flex border border-gray-700 rounded-lg p-4 bg-gray-900"
-            >
+            <li v-for="category in categoriesData" :key="category.id"
+              class="md:flex border border-cz-red-950 rounded-lg p-4 bg-cz-background-700">
               <!-- Placeholder Image -->
-              <div class="w-1/4 h-24 bg-gray-700 flex items-center justify-center text-gray-400">
+              <div class="md:w-1/4 h-24 md:h-24 bg-cz-red-950 bg-opacity-50 md:flex md:items-center md:justify-center text-gray-400">
                 Image
               </div>
 
               <!-- Category Details -->
-              <div class="ml-4 w-3/4">
-                <h2 class="text-2xl text-white">{{ category.title }}</h2>
-                <p class="text-gray-500">{{ category.startDate }} <span v-if="category.endDate">- {{ category.endDate }}</span></p>
+              <div class="mt-4 md:mt-0 md:ml-4 md:w-3/4">
+                <h2 class="md:text-2xl text-white">{{ category.title }}</h2>
+                <p class="text-cz-red-700 text-sm md:text-base text-opacity-50">{{ category.startDate }} <span v-if="category.endDate">- {{
+                  category.endDate
+                    }}</span></p>
                 <p class="text-gray-300">{{ category.description }}</p>
-                <a :href="category.url" class="text-blue-400 mt-2 block">Learn More</a>
+                <a :href="category.url" class="text-cz-red-400 hover:text-cz-red-200 md:mt-2 md:block">Find out more</a>
               </div>
             </li>
           </ul>
         </div>
       </main>
     </div>
-  </div>
+  </body>
+
 </template>
