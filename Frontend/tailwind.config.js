@@ -20,6 +20,7 @@ module.exports = {
           '950' : '#52000a',
         },
         'cz-background': {
+          '700' : 'rgba(24, 24, 24, 0.8)',
           '800' : '#181818',
           '900' : '#1F1F1F',
         }
@@ -28,6 +29,7 @@ module.exports = {
       spacing: {
         '5px' : '5px',
         '20px' : '20px',
+        '19': '4.75rem'
       },
     },
   },
