@@ -37,6 +37,17 @@ namespace Backend.Controllers
             return category;
         }
 
+        [HttpGet("CategoryUrl")]
+        public async Task<IActionResult> GetCategoryByUrl(string url)
+        {
+            var category = await _context.Category.FirstOrDefaultAsync(c => c.Url == url);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
+
         [HttpGet("CategoriesByTabs")]
         public async Task<ActionResult<IEnumerable<CategoryDb>>> GetCategoriesByTab(string tabs)
         {
@@ -113,7 +124,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut("EditCategoryTitle")]
-        public async Task<IActionResult> EditName(int id, string title)
+        public async Task<IActionResult> EditTitle(int id, string title)
         {
             var category = await _context.Category.FindAsync(id);
 

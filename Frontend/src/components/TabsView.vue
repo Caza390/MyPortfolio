@@ -24,22 +24,38 @@ const categoriesData = ref<Category[]>([]);
 const tabsData = ref<TabsData | null>(null);
 const loading = ref(true);
 const error = ref('');
+const years = ref<number[]>([]); // Array to store unique sorted years
 
 const fetchCategoriesData = async () => {
   if (!tabsUrl.value) {
     error.value = 'No valid URL provided.';
-    loading.value = false;
     return;
   }
 
-  loading.value = true;
   try {
     const response = await fetch(`http://192.168.1.90:5176/api/category/CategoriesByTabs?tabs=${tabsUrl.value}`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch categories data');
     }
-    categoriesData.value = await response.json();
+    const data = await response.json();
+
+    // Sort categories by startDate, with latest dates first
+    categoriesData.value = data.sort((a: Category, b: Category) => {
+      return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+    });
+
+    // Calculate unique years from the categories' startDate and endDate
+    const uniqueYears = new Set<number>();
+    categoriesData.value.forEach((category) => {
+      const startYear = new Date(category.startDate).getFullYear();
+      uniqueYears.add(startYear);
+      if (category.endDate) {
+        const endYear = new Date(category.endDate).getFullYear();
+        uniqueYears.add(endYear);
+      }
+    });
+    years.value = Array.from(uniqueYears).sort((a, b) => b - a); // Convert Set to sorted array
   } catch (err: any) {
     error.value = err.message;
   } finally {
@@ -62,6 +78,24 @@ const fetchTabsData = async () => {
   }
 };
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
+const scrollToYear = (year: number) => {
+  const yearElement = document.getElementById(`year-${year}`);
+  if (yearElement) {
+    const offset = -25; // Adjust for fixed header or offset if needed
+    window.scrollTo({
+      top: yearElement.offsetTop + offset,
+      behavior: "smooth",
+    });
+  }
+};
+
 onMounted(() => {
   fetchCategoriesData();
   fetchTabsData();
@@ -78,13 +112,13 @@ watch(() => route.params.tabs, (newTabs) => {
 
   <body class="md:flex">
     <!-- Sidebar -->
-    <aside class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white">
-      <ul class="space-y-1 h-full flex flex-col items-center">
-        <li><button class="font-bold text-xl my-2 text-center">Top</button></li>
-        <li><button class="font-bold text-xl my-2 text-center">Undertaking</button></li>
-        <li><button class="font-bold text-xl my-2 text-center">2025</button></li>
-        <li><button class="font-bold text-xl my-2 text-center">2024</button></li>
-        <li><button class="font-bold text-xl my-2 text-center">2023</button></li>
+    <aside
+      class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white">
+      <ul class="space-y-1 h-full mx-8 flex flex-col items-center">
+        <li><button @click="scrollToTop" class="font-bold text-xl my-2 text-center">Top</button></li>
+        <li v-for="year in years" :key="year">
+          <button @click="scrollToYear(year)" class="font-bold text-xl my-2 text-center">{{ year }}</button>
+        </li>
       </ul>
     </aside>
 
@@ -100,25 +134,35 @@ watch(() => route.params.tabs, (newTabs) => {
       <!-- Category List -->
       <main class="md:px-20">
         <div v-if="!loading && categoriesData.length > 0">
-          <ul class="space-y-4">
-            <li v-for="category in categoriesData" :key="category.id"
-              class="md:flex border border-cz-red-950 rounded-lg p-4 bg-cz-background-700">
-              <!-- Placeholder Image -->
-              <div class="md:w-1/4 h-24 md:h-24 bg-cz-red-950 bg-opacity-50 md:flex md:items-center md:justify-center text-gray-400">
-                Image
-              </div>
+          <!-- Loop through each year and display categories that match that year -->
+          <div v-for="year in years" :key="year" :id="'year-' + year" class="pt-4">
+            <!-- Year Heading -->
+            <h2 class="text-2xl font-bold text-white mb-4">{{ year }}</h2>
 
-              <!-- Category Details -->
-              <div class="mt-4 md:mt-0 md:ml-4 md:w-3/4">
-                <h2 class="md:text-2xl text-white">{{ category.title }}</h2>
-                <p class="text-cz-red-700 text-sm md:text-base text-opacity-50">{{ category.startDate }} <span v-if="category.endDate">- {{
-                  category.endDate
-                    }}</span></p>
-                <p class="text-gray-300">{{ category.description }}</p>
-                <a :href="category.url" class="text-cz-red-400 hover:text-cz-red-200 md:mt-2 md:block">Find out more</a>
-              </div>
-            </li>
-          </ul>
+            <!-- List of categories for this year -->
+            <ul class="space-y-4">
+              <li v-for="category in categoriesData.filter(cat => new Date(cat.startDate).getFullYear() === year)"
+                  :key="category.id"
+                  class="md:flex border border-cz-red-950 rounded-lg p-4 bg-cz-background-700">
+                
+                <!-- Placeholder Image -->
+                <div class="md:w-1/4 h-24 md:h-24 bg-cz-red-950 bg-opacity-50 md:flex md:items-center md:justify-center text-gray-400">
+                  Image
+                </div>
+
+                <!-- Category Details -->
+                <div class="mt-4 md:mt-0 md:ml-4 md:w-3/4">
+                  <h3 class="md:text-2xl text-white">{{ category.title }}</h3>
+                  <p class="text-cz-red-700 text-sm md:text-base text-opacity-50">
+                    {{ category.startDate }} <span v-if="category.endDate">- {{ category.endDate }}</span>
+                  </p>
+                  <p class="text-gray-300">{{ category.description }}</p>
+                  <router-link v-if="category.url" :to="`/${tabsUrl}/${category.url}`"
+                    class="text-cz-red-400 hover:text-cz-red-200 md:mt-2 md:block">Find out more</router-link>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </main>
     </div>
