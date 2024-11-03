@@ -27,6 +27,7 @@ const subcategoriesData = ref<Subcategory[]>([]);
 const categoryData = ref<CategoryData | null>(null);
 const loading = ref(true);
 const error = ref('');
+const uniqueHeadings = ref<string[]>([]); // Declare uniqueHeadings as a reactive ref
 
 // Fetch subcategories data
 const fetchSubcategoriesData = async () => {
@@ -50,12 +51,22 @@ const fetchSubcategoriesData = async () => {
 
     // Sort by startDate (old to new), then by heading
     subcategoriesData.value = data.sort((a: Subcategory, b: Subcategory) => {
-      const dateA = a.startDate ? new Date : new Date(0);
-      const dateB = b.startDate ? new Date : new Date(0);
+      const dateA = a.startDate ? new Date(a.startDate) : new Date(0);
+      const dateB = b.startDate ? new Date(b.startDate) : new Date(0);
       
       if (dateA.getTime() !== dateB.getTime()) return dateA.getTime() - dateB.getTime();
       return (a.heading || '').localeCompare(b.heading || '');
     });
+
+    // Gather unique headings
+    const uniqueHeadingSet = new Set<string>();
+subcategoriesData.value.forEach((subcategory) => {
+  if (subcategory.heading) {
+    uniqueHeadingSet.add(subcategory.heading);
+  }
+});
+    uniqueHeadings.value = Array.from(uniqueHeadingSet).sort(); // Convert Set to sorted Array
+
   } catch (err: any) {
     error.value = err.message;
   } finally {
@@ -82,28 +93,6 @@ const fetchCategoryData = async () => {
   }
 };
 
-// Group subcategories by heading
-const groupedSubcategories = computed(() => {
-  const groups: { [key: string]: Subcategory[] } = {};
-  
-  subcategoriesData.value.forEach(subcategory => {
-    const heading = subcategory.heading || 'Uncategorized';
-    if (!groups[heading]) {
-      groups[heading] = [];
-    }
-    groups[heading].push(subcategory);
-  });
-
-  return Object.values(groups);
-});
-
-// Compute headings from grouped subcategories
-const headings = computed(() => {
-  return groupedSubcategories.value
-    .map(group => group[0].heading)
-    .filter((heading): heading is string => heading !== null); // Type guard to ensure heading is string
-});
-
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
@@ -111,7 +100,8 @@ const scrollToTop = () => {
   });
 };
 
-const scrollToHeading = (heading: string) => { // Changed from Heading to heading
+const scrollToHeading = (heading: string) => {
+  console.log(`Trying to scroll to: heading-${heading}`); // Log the ID being searched
   const headingElement = document.getElementById(`heading-${heading}`);
   if (headingElement) {
     const offset = -25; // Adjust for fixed header or offset if needed
@@ -119,8 +109,12 @@ const scrollToHeading = (heading: string) => { // Changed from Heading to headin
       top: headingElement.offsetTop + offset,
       behavior: "smooth",
     });
+  } else {
+    console.error(`Element not found: heading-${heading}`); // Log if the element is not found
   }
 };
+
+console.log('Unique Headings:', uniqueHeadings.value);
 
 onMounted(() => {
   fetchSubcategoriesData();
@@ -136,6 +130,19 @@ watch(
     fetchCategoryData();
   }
 );
+
+// Computed property for grouped subcategories
+const groupedSubcategories = computed(() => {
+  const groups: { [key: string]: Subcategory[] } = {};
+  subcategoriesData.value.forEach((subcategory) => {
+    const heading = subcategory.heading || 'Uncategorized';
+    if (!groups[heading]) {
+      groups[heading] = [];
+    }
+    groups[heading].push(subcategory);
+  });
+  return Object.values(groups);
+});
 </script>
 
 
@@ -143,8 +150,10 @@ watch(
   <body class="md:flex">
     <aside class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white">
       <ul class="space-y-1 h-full mx-8 flex flex-col items-center">
-        <li><button @click="scrollToTop" class="font-bold text-xl my-2 text-center">Top</button></li>
-        <li v-for="heading in headings" :key="heading">
+        <li>
+          <button @click="scrollToTop" class="font-bold text-xl my-2 text-center">Top</button>
+        </li>
+        <li v-for="heading in uniqueHeadings" :key="heading"> <!-- Change headings to uniqueHeadings -->
           <button @click="scrollToHeading(heading)" class="font-bold text-xl my-2 text-center">{{ heading }}</button>
         </li>
       </ul>
@@ -158,8 +167,10 @@ watch(
 
       <main class="md:px-20">
         <div v-if="!loading && subcategoriesData.length > 0">
-          <template v-for="(group, index) in groupedSubcategories">
-            <h2 v-if="group.length > 0" class="text-2xl font-bold text-white mb-4">{{ group[0].heading }}</h2>
+          <template v-for="(group, index) in groupedSubcategories" :key="index"> <!-- Provide a key for the group -->
+            <h2 v-if="group.length > 0" :id="'heading-' + (group[0].heading || 'Unnamed')" class="text-2xl font-bold text-white mb-4">
+              {{ group[0].heading }}
+            </h2>
             <ul class="space-y-4">
               <li v-for="subcategory in group" :key="subcategory.id"
                   class="md:flex border border-cz-red-950 rounded-lg p-4 bg-cz-background-700">
@@ -168,7 +179,10 @@ watch(
                 </div>
                 <div class="mt-4 md:mt-0 md:ml-4 md:w-3/4">
                   <h3 class="md:text-2xl text-white">{{ subcategory.title }}</h3>
-                  <p class="text-cz-red-700 text-sm md:text-base text-opacity-50"><span v-if="subcategory.endDate">{{ subcategory.startDate }}</span><span v-if="subcategory.endDate">- {{ subcategory.endDate }}</span></p>
+                  <p class="text-cz-red-700 text-sm md:text-base text-opacity-50">
+                    <span v-if="subcategory.startDate">{{ subcategory.startDate }}</span>
+                    <span v-if="subcategory.endDate"> - {{ subcategory.endDate }}</span>
+                  </p>
                   <p class="text-gray-300">{{ subcategory.description }}</p>
                 </div>
               </li>
@@ -180,3 +194,4 @@ watch(
     </div>
   </body>
 </template>
+
