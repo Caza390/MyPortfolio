@@ -70,7 +70,8 @@ namespace Backend.Controllers
             string? url,
             string startDate, // Accepting as string
             string? endDate,  // Nullable string for optional end date
-            string tabs)
+            string tabs,
+            IFormFile? imageFile)
         {
             // Basic validation to ensure required fields are provided
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(tabs))
@@ -104,6 +105,28 @@ namespace Backend.Controllers
                 return BadRequest("End date cannot be before start date.");
             }
 
+            string? imagePath = null;
+            if (imageFile != null)
+            {
+                // Define the path to store images under StoredImages/Category
+                var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages", "Category");
+                if (!Directory.Exists(imageFolder))
+                {
+                    Directory.CreateDirectory(imageFolder);
+                }
+
+                var uniqueFileName = $"{Guid.NewGuid()}_{imageFile.FileName}";
+                var filePath = Path.Combine(imageFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                imagePath = $"/StoredImages/Category/{uniqueFileName}";
+            }
+
+
             // Create new category entity
             var newCategory = new CategoryDb
             {
@@ -112,7 +135,8 @@ namespace Backend.Controllers
                 Url = url,
                 StartDate = parsedStartDate,
                 EndDate = parsedEndDate,
-                Tabs = tabs
+                Tabs = tabs,
+                ImagePath = imagePath
             };
 
             // Save the new category to the database
@@ -121,6 +145,44 @@ namespace Backend.Controllers
 
             // Return the created category details
             return CreatedAtAction(nameof(GetCategory), new { id = newCategory.Id }, newCategory);
+        }
+
+        [HttpPost("UploadImage")]
+        public async Task<IActionResult> UploadImage(int categoryId, IFormFile imageFile)
+        {
+            if (imageFile == null || imageFile.Length == 0)
+            {
+                return BadRequest("No image file provided.");
+            }
+
+            var category = await _context.Category.FindAsync(categoryId);
+            if (category == null)
+            {
+                return NotFound("Category not found.");
+            }
+
+            // Define the path to store images under StoredImages/Category
+            var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages", "Category");
+            if (!Directory.Exists(imageFolder))
+            {
+                Directory.CreateDirectory(imageFolder);
+            }
+
+            // Generate a unique filename for the image
+            var uniqueFileName = $"{Guid.NewGuid()}_{imageFile.FileName}";
+            var filePath = Path.Combine(imageFolder, uniqueFileName);
+
+            // Save the file to the server
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
+
+            // Update the category with the image path
+            category.ImagePath = $"/StoredImages/Category/{uniqueFileName}"; // Save relative path
+            await _context.SaveChangesAsync();
+
+            return Ok(new { ImagePath = category.ImagePath });
         }
 
         [HttpPut("EditCategoryTitle")]

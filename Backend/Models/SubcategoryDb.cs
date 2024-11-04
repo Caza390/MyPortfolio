@@ -9,5 +9,6 @@
         public required DateOnly? StartDate { get; set; }
         public DateOnly? EndDate { get; set; }
         public required string Category { get; set; }
+        public string? ImagePath { get; set; }
     }
 }

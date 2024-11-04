@@ -9,5 +9,6 @@
         public DateOnly? EndDate { get; set; }
         public string? Url { get; set; }
         public required string Tabs { get; set; }
+        public string? ImagePath { get; set; }
     }
 }

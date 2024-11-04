@@ -59,7 +59,8 @@ namespace Backend.Controllers
             string description,
             string? startDate,
             string? endDate,
-            string category)
+            string category,
+            IFormFile? imageFile)
         {
             if (string.IsNullOrEmpty(heading) || string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(category))
             {
@@ -97,6 +98,26 @@ namespace Backend.Controllers
                 return BadRequest("End date cannot be before start date.");
             }
 
+            string? imagePath = null;
+            if (imageFile != null)
+            {
+                var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages");
+                if (!Directory.Exists(imageFolder))
+                {
+                    Directory.CreateDirectory(imageFolder);
+                }
+
+                var uniqueFileName = $"{Guid.NewGuid()}_{imageFile.FileName}";
+                var filePath = Path.Combine(imageFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                imagePath = $"/StoredImages/{uniqueFileName}";
+            }
+
             var newSubcategory = new SubcategoryDb
             {
                 Heading = heading,
@@ -104,7 +125,8 @@ namespace Backend.Controllers
                 Description = description,
                 StartDate = parsedStartDate,
                 EndDate = parsedEndDate,
-                Category = category
+                Category = category,
+                ImagePath = imagePath
             };
 
             _context.Subcategory.Add(newSubcategory);
@@ -112,6 +134,41 @@ namespace Backend.Controllers
 
             return CreatedAtAction(nameof(GetSubcategory), new { id = newSubcategory.Id }, newSubcategory);
         }
+
+        [HttpPost("UploadImage")]
+        public async Task<IActionResult> UploadImage(int subcategoryId, IFormFile imageFile)
+        {
+            if (imageFile == null || imageFile.Length == 0)
+            {
+                return BadRequest("No image file provided.");
+            }
+
+            var subcategory = await _context.Subcategory.FindAsync(subcategoryId);
+            if (subcategory == null)
+            {
+                return NotFound("Subcategory not found.");
+            }
+
+            var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages", "Subcategory");
+            if (!Directory.Exists(imageFolder))
+            {
+                Directory.CreateDirectory(imageFolder);
+            }
+
+            var uniqueFileName = $"{Guid.NewGuid()}_{imageFile.FileName}";
+            var filePath = Path.Combine(imageFolder, uniqueFileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
+
+            subcategory.ImagePath = $"/StoredImages/Subcategory/{uniqueFileName}";
+            await _context.SaveChangesAsync();
+
+            return Ok(new { ImagePath = subcategory.ImagePath });
+        }
+
 
         [HttpPut("EditSubcategoryHeading")]
         public async Task<IActionResult> EditHeading(int id, string heading)

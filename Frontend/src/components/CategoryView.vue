@@ -10,6 +10,7 @@ interface Subcategory {
   startDate?: string | null;
   endDate?: string | null;
   category: string;
+  imagePath?: string;
 }
 
 interface CategoryData {
@@ -22,12 +23,12 @@ interface CategoryData {
 const route = useRoute();
 const tabsUrl = ref(route.params.tabs ? String(route.params.tabs) : '');
 const categoryUrl = ref(route.params.category ? String(route.params.category) : '');
-
 const subcategoriesData = ref<Subcategory[]>([]);
 const categoryData = ref<CategoryData | null>(null);
 const loading = ref(true);
 const error = ref('');
 const uniqueHeadings = ref<string[]>([]);
+const backendBaseUrl = "http://192.168.1.90:5176";
 
 const fetchSubcategoriesData = async () => {
   if (!tabsUrl.value || !categoryUrl.value) {
@@ -38,7 +39,6 @@ const fetchSubcategoriesData = async () => {
 
   loading.value = true;
   try {
-    console.log(`Fetching subcategories for tabs: ${tabsUrl.value} and category: ${categoryUrl.value}`);
     const response = await fetch(
       `http://192.168.1.90:5176/api/subcategory/SubCategoriesByCategory?tabs=${tabsUrl.value}&category=${categoryUrl.value}`
     );
@@ -46,9 +46,16 @@ const fetchSubcategoriesData = async () => {
     if (!response.ok) {
       throw new Error('Failed to fetch subcategories data');
     }
+
     const data: Subcategory[] = await response.json();
 
-    subcategoriesData.value = data.sort((a: Subcategory, b: Subcategory) => {
+    // Set imagePath with backendBaseUrl for each subcategory if it exists
+    subcategoriesData.value = data.map((subcategory: Subcategory) => {
+      if (subcategory.imagePath) {
+        subcategory.imagePath = `${backendBaseUrl}/${subcategory.imagePath.replace(/^\//, '')}`;
+      }
+      return subcategory;
+    }).sort((a, b) => {
       const dateA = a.startDate ? new Date(a.startDate) : new Date(0);
       const dateB = b.startDate ? new Date(b.startDate) : new Date(0);
 
@@ -70,6 +77,7 @@ const fetchSubcategoriesData = async () => {
     loading.value = false;
   }
 };
+
 
 const fetchCategoryData = async () => {
   if (!tabsUrl.value || !categoryUrl.value) return;
@@ -169,13 +177,19 @@ const groupedSubcategories = computed(() => {
               class="text-2xl font-bold text-white mb-4">
               {{ group[0].heading }}
             </h2>
+
             <ul class="space-y-4">
               <li v-for="subcategory in group" :key="subcategory.id"
                 class="md:flex border border-cz-red-950 rounded-lg p-4 bg-cz-background-700">
-                <div
+                
+                <div v-if="subcategory.imagePath" class="md:w-1/4 aspect-ratio-box">
+                  <img :src="subcategory.imagePath" alt="Subcategory Image" class="subcategory-image rounded-lg" />
+                </div>
+                <div v-else
                   class="md:w-1/4 h-24 md:h-24 bg-cz-red-950 bg-opacity-50 md:flex md:items-center md:justify-center text-gray-400">
                   Image
                 </div>
+
                 <div class="mt-4 md:mt-0 md:ml-4 md:w-3/4">
                   <h3 class="md:text-2xl text-white">{{ subcategory.title }}</h3>
                   <p class="text-cz-red-700 text-sm md:text-base text-opacity-50">
