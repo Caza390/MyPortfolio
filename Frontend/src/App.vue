@@ -14,6 +14,7 @@ const closeDropdown = () => {
 </script>
 
 <template>
+
   <div class="bg-cz-background-900 min-h-screen">
     <div>
       <header class="bg-cz-background-800 pt-5px pb-3 px-20px">
@@ -25,7 +26,6 @@ const closeDropdown = () => {
 
             <div class="md:hidden">
               <button @click="isDropdownOpen = !isDropdownOpen" class="text-white focus:outline-none">
-                <!-- Hamburger Icon -->
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
@@ -56,7 +56,6 @@ const closeDropdown = () => {
               Contact Me</RouterLink>
           </nav>
 
-          <!-- Dropdown Menu for Mobile -->
           <div v-if="isDropdownOpen"
             class="absolute top-16 left-0 w-full bg-cz-background-800 mt-2 rounded-lg shadow-lg z-50">
             <div class="flex flex-col space-y-4 p-4">
@@ -81,8 +80,5 @@ const closeDropdown = () => {
       <RouterView />
     </main>
   </div>
-</template>
 
-<style scoped>
-/** When it comes to making different screen views phones have no prefix, tablets are sm:, standard screens are md:, higher monitors are lg:. */
-</style>
+</template>

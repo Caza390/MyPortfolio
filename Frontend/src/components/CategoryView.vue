@@ -7,7 +7,7 @@ interface Subcategory {
   heading: string | null;
   title: string;
   description: string;
-  startDate?: string | null; 
+  startDate?: string | null;
   endDate?: string | null;
   category: string;
 }
@@ -27,9 +27,8 @@ const subcategoriesData = ref<Subcategory[]>([]);
 const categoryData = ref<CategoryData | null>(null);
 const loading = ref(true);
 const error = ref('');
-const uniqueHeadings = ref<string[]>([]); // Declare uniqueHeadings as a reactive ref
+const uniqueHeadings = ref<string[]>([]);
 
-// Fetch subcategories data
 const fetchSubcategoriesData = async () => {
   if (!tabsUrl.value || !categoryUrl.value) {
     error.value = 'Tabs or Category URL is missing.';
@@ -49,23 +48,21 @@ const fetchSubcategoriesData = async () => {
     }
     const data: Subcategory[] = await response.json();
 
-    // Sort by startDate (old to new), then by heading
     subcategoriesData.value = data.sort((a: Subcategory, b: Subcategory) => {
       const dateA = a.startDate ? new Date(a.startDate) : new Date(0);
       const dateB = b.startDate ? new Date(b.startDate) : new Date(0);
-      
+
       if (dateA.getTime() !== dateB.getTime()) return dateA.getTime() - dateB.getTime();
       return (a.heading || '').localeCompare(b.heading || '');
     });
 
-    // Gather unique headings
     const uniqueHeadingSet = new Set<string>();
-subcategoriesData.value.forEach((subcategory) => {
-  if (subcategory.heading) {
-    uniqueHeadingSet.add(subcategory.heading);
-  }
-});
-    uniqueHeadings.value = Array.from(uniqueHeadingSet).sort(); // Convert Set to sorted Array
+    subcategoriesData.value.forEach((subcategory) => {
+      if (subcategory.heading) {
+        uniqueHeadingSet.add(subcategory.heading);
+      }
+    });
+    uniqueHeadings.value = Array.from(uniqueHeadingSet).sort();
 
   } catch (err: any) {
     error.value = err.message;
@@ -74,7 +71,6 @@ subcategoriesData.value.forEach((subcategory) => {
   }
 };
 
-// Fetch category data
 const fetchCategoryData = async () => {
   if (!tabsUrl.value || !categoryUrl.value) return;
 
@@ -101,16 +97,16 @@ const scrollToTop = () => {
 };
 
 const scrollToHeading = (heading: string) => {
-  console.log(`Trying to scroll to: heading-${heading}`); // Log the ID being searched
+  console.log(`Trying to scroll to: heading-${heading}`);
   const headingElement = document.getElementById(`heading-${heading}`);
   if (headingElement) {
-    const offset = -25; // Adjust for fixed header or offset if needed
+    const offset = -25;
     window.scrollTo({
       top: headingElement.offsetTop + offset,
       behavior: "smooth",
     });
   } else {
-    console.error(`Element not found: heading-${heading}`); // Log if the element is not found
+    console.error(`Element not found: heading-${heading}`);
   }
 };
 
@@ -131,7 +127,6 @@ watch(
   }
 );
 
-// Computed property for grouped subcategories
 const groupedSubcategories = computed(() => {
   const groups: { [key: string]: Subcategory[] } = {};
   subcategoriesData.value.forEach((subcategory) => {
@@ -147,13 +142,15 @@ const groupedSubcategories = computed(() => {
 
 
 <template>
+
   <body class="md:flex">
-    <aside class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white">
+    <aside
+      class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white">
       <ul class="space-y-1 h-full mx-8 flex flex-col items-center">
         <li>
           <button @click="scrollToTop" class="font-bold text-xl my-2 text-center">Top</button>
         </li>
-        <li v-for="heading in uniqueHeadings" :key="heading"> <!-- Change headings to uniqueHeadings -->
+        <li v-for="heading in uniqueHeadings" :key="heading">
           <button @click="scrollToHeading(heading)" class="font-bold text-xl my-2 text-center">{{ heading }}</button>
         </li>
       </ul>
@@ -167,14 +164,16 @@ const groupedSubcategories = computed(() => {
 
       <main class="md:px-20">
         <div v-if="!loading && subcategoriesData.length > 0">
-          <template v-for="(group, index) in groupedSubcategories" :key="index"> <!-- Provide a key for the group -->
-            <h2 v-if="group.length > 0" :id="'heading-' + (group[0].heading || 'Unnamed')" class="text-2xl font-bold text-white mb-4">
+          <template v-for="(group, index) in groupedSubcategories" :key="index">
+            <h2 v-if="group.length > 0" :id="'heading-' + (group[0].heading || 'Unnamed')"
+              class="text-2xl font-bold text-white mb-4">
               {{ group[0].heading }}
             </h2>
             <ul class="space-y-4">
               <li v-for="subcategory in group" :key="subcategory.id"
-                  class="md:flex border border-cz-red-950 rounded-lg p-4 bg-cz-background-700">
-                <div class="md:w-1/4 h-24 md:h-24 bg-cz-red-950 bg-opacity-50 md:flex md:items-center md:justify-center text-gray-400">
+                class="md:flex border border-cz-red-950 rounded-lg p-4 bg-cz-background-700">
+                <div
+                  class="md:w-1/4 h-24 md:h-24 bg-cz-red-950 bg-opacity-50 md:flex md:items-center md:justify-center text-gray-400">
                   Image
                 </div>
                 <div class="mt-4 md:mt-0 md:ml-4 md:w-3/4">
@@ -193,5 +192,5 @@ const groupedSubcategories = computed(() => {
       </main>
     </div>
   </body>
-</template>
 
+</template>

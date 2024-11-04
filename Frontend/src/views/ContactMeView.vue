@@ -6,6 +6,7 @@ const emailLink = computed(() => `mailto:${emailAddress}`);
 </script>
 
 <template>
+
   <main class="p-5 mt:py-24 mt:px-36">
     <p class="text-white text-xl mt:text-3xl">Contact me with either email, phone or discord.
       I often check my email account and made a discord profile for business use.
@@ -24,4 +25,5 @@ const emailLink = computed(() => `mailto:${emailAddress}`);
     </p>
     <p class="text-white text-xl mt:text-3xl">I look forward to hearing from you!</p>
   </main>
+
 </template>
