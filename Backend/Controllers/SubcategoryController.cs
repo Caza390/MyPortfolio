@@ -312,5 +312,23 @@ namespace Backend.Controllers
 
             return Ok(subcategory);
         }
+
+        [HttpDelete("DeleteSubcategory")]
+        public async Task<IActionResult> DeleteSubcategory(int id)
+        {
+            var subcategory = await _context.Subcategory.FindAsync(id);
+
+            if (subcategory == null)
+            {
+                return NotFound();
+            }
+
+            _context.Subcategory.Remove(subcategory);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+
+        }
     }
 }

@@ -68,8 +68,8 @@ namespace Backend.Controllers
             string title,
             string description,
             string? url,
-            string startDate, // Accepting as string
-            string? endDate,  // Nullable string for optional end date
+            string startDate,
+            string? endDate,
             string tabs,
             IFormFile? imageFile)
         {
@@ -327,6 +327,24 @@ namespace Backend.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(category);
+        }
+
+        [HttpDelete("DeleteCategory")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = await _context.Category.FindAsync(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            _context.Category.Remove(category);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+
         }
     }
 }
