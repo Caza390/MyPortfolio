@@ -2,6 +2,7 @@
 </script>
 
 <template>
+
   <main class="p-5 md:px-40 md:py-20">
     <div class="lg:grid lg:grid-cols-2 items-center">
       <div class="flex justify-center items-center">
@@ -27,20 +28,24 @@
 
           <div class="flex justify-center items-center space-x-5 lg:space-x-10">
             <a href="https://github.com/Caza390" target="_blank">
-              <img src="https://simpleicons.org/icons/github.svg" alt="GitHub" class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
+              <img src="https://simpleicons.org/icons/github.svg" alt="GitHub"
+                class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
             </a>
             <a href="https://www.linkedin.com/in/callum-carter-begbie-7854bb183/" target="_blank">
-              <img src="https://simpleicons.org/icons/linkedin.svg" alt="LinkedIn" class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
+              <img src="https://simpleicons.org/icons/linkedin.svg" alt="LinkedIn"
+                class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
             </a>
             <a href="https://x.com/caza390" target="_blank">
               <img src="https://simpleicons.org/icons/x.svg" alt="X" class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
             </a>
             <a href="https://www.instagram.com/caza390/" target="_blank">
-              <img src="https://simpleicons.org/icons/instagram.svg" alt="Instagram" class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
+              <img src="https://simpleicons.org/icons/instagram.svg" alt="Instagram"
+                class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
             </a>
           </div>
         </div>
       </div>
     </div>
   </main>
+
 </template>
