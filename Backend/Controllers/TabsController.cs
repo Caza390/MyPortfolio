@@ -24,7 +24,6 @@ namespace Backend.Controllers
 
         }
 
-
         [HttpGet("TabId")]
         public async Task<ActionResult<TabsDb>> GetTabs(int id)
         {
@@ -131,6 +130,24 @@ namespace Backend.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(tabs);
+
+        }
+
+        [HttpDelete("DeleteTab")]
+        public async Task<IActionResult> DeleteTab(int id)
+        {
+            var tab = await _context.Tabs.FindAsync(id);
+
+            if (tab == null)
+            {
+                return NotFound();
+            }
+
+            _context.Tabs.Remove(tab);
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
 
         }
     }
