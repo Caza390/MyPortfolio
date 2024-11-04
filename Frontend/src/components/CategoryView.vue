@@ -153,19 +153,20 @@ const groupedSubcategories = computed(() => {
 
   <body class="md:flex">
     <aside
-      class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white">
-      <ul class="space-y-1 h-full mx-8 flex flex-col items-center">
+      class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white"
+      style="width: 160px; max-width: 160; overflow: hidden;">
+      <ul class="space-y-1 h-full flex flex-col items-center">
         <li>
-          <button @click="scrollToTop" class="font-bold text-xl my-2 text-center">Top</button>
+          <button @click="scrollToTop" class="font-bold text-xl my-2 text-center hover:text-cz-red-100">Top</button>
         </li>
         <li v-for="heading in uniqueHeadings" :key="heading">
-          <button @click="scrollToHeading(heading)" class="font-bold text-xl my-2 text-center">{{ heading }}</button>
+          <button @click="scrollToHeading(heading)" class="font-bold text-xl my-2 text-center hover:text-cz-red-100">{{ heading }}</button>
         </li>
       </ul>
     </aside>
 
     <div class="md:w-5/6 p-4">
-      <header v-if="categoryData" class="md:mx-40 mb-6 text-center">
+      <header v-if="categoryData" class="md:mx-40 text-center">
         <h1 class="text-white text-3xl md:text-5xl">{{ categoryData.title }}</h1>
         <p class="text-gray-300 md:text-lg">{{ categoryData.description }}</p>
       </header>
@@ -174,7 +175,7 @@ const groupedSubcategories = computed(() => {
         <div v-if="!loading && subcategoriesData.length > 0">
           <template v-for="(group, index) in groupedSubcategories" :key="index">
             <h2 v-if="group.length > 0" :id="'heading-' + (group[0].heading || 'Unnamed')"
-              class="text-2xl font-bold text-white mb-4">
+              class="text-2xl font-bold text-cz-red-50 mt-8 mb-2">
               {{ group[0].heading }}
             </h2>
 

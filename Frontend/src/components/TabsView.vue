@@ -44,10 +44,8 @@ const fetchCategoriesData = async () => {
 
     const data: Category[] = await response.json();
 
-    // Prepend backendBaseUrl to imagePath if it exists, ensuring no double slashes
     categoriesData.value = data.map((category: Category) => {
       if (category.imagePath) {
-        // Remove any leading slash from imagePath to prevent double slashes
         category.imagePath = `${backendBaseUrl}/${category.imagePath.replace(/^\//, '')}`;
       }
       return category;
@@ -122,17 +120,18 @@ watch(() => route.params.tabs, (newTabs) => {
 
   <body class="md:flex">
     <aside
-      class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white">
-      <ul class="space-y-1 h-full mx-8 flex flex-col items-center">
-        <li><button @click="scrollToTop" class="font-bold text-xl my-2 text-center">Top</button></li>
+      class="hidden md:block sticky top-0 h-screen px-6 py-4 bg-cz-background-700 border-r border-cz-background-900 text-white"
+      style="width: 160px; max-width: 160; overflow: hidden;">
+      <ul class="space-y-1 h-full flex flex-col items-center">
+        <li><button @click="scrollToTop" class="font-bold text-xl my-2 text-center hover:text-cz-red-100">Top</button></li>
         <li v-for="year in years" :key="year">
-          <button @click="scrollToYear(year)" class="font-bold text-xl my-2 text-center">{{ year }}</button>
+          <button @click="scrollToYear(year)" class="font-bold text-xl my-2 text-center hover:text-cz-red-100">{{ year }}</button>
         </li>
       </ul>
     </aside>
 
     <div class="md:w-5/6 p-4">
-      <header v-if="tabsData" class="md:mx-40 mb-6 text-center">
+      <header v-if="tabsData" class="md:mx-40 text-center">
         <h1 class="text-white text-3xl md:text-5xl">{{ tabsData.title }}</h1>
         <p class="text-gray-300 md:text-lg">{{ tabsData.subtitle }}</p>
       </header>
@@ -140,7 +139,7 @@ watch(() => route.params.tabs, (newTabs) => {
       <main class="md:px-20">
         <div v-if="!loading && categoriesData.length > 0">
           <div v-for="year in years" :key="year" :id="'year-' + year" class="pt-4">
-            <h2 class="text-2xl font-bold text-white mb-4">{{ year }}</h2>
+            <h2 class="text-2xl font-bold text-cz-red-50 my-8 mb-2">{{ year }}</h2>
 
             <ul class="space-y-4">
               <li v-for="category in categoriesData.filter(cat => new Date(cat.startDate).getFullYear() === year)"

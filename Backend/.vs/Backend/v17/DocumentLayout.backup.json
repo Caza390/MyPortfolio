@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\controllers\\subcategorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:controllers\\subcategorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\models\\subcategorydb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:models\\subcategorydb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\models\\categorydb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:models\\categorydb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\controllers\\tabscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,14 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\models\\tabsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:models\\tabsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\models\\categorydb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:models\\categorydb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|e:\\coding\\sites\\myportfolio\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{643F15B9-A81B-4335-B19A-B11C4F6E38A8}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,25 +42,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T20:39:13.843Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "SubcategoryController.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\SubcategoryController.cs",
               "RelativeDocumentMoniker": "Controllers\\SubcategoryController.cs",
               "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\SubcategoryController.cs",
               "RelativeToolTip": "Controllers\\SubcategoryController.cs",
-              "ViewState": "AgIAAOkAAAAAAAAAAAAgwEUBAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwL8AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-31T01:14:02.714Z",
               "EditorCaption": ""
@@ -77,27 +61,27 @@
               "RelativeDocumentMoniker": "Models\\SubcategoryDb.cs",
               "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\SubcategoryDb.cs",
               "RelativeToolTip": "Models\\SubcategoryDb.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-31T01:13:47.974Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
               "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\CategoryController.cs",
               "RelativeToolTip": "Controllers\\CategoryController.cs",
-              "ViewState": "AgIAAPgAAAAAAAAAAAAmwFkBAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAA9wI0AAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-19T00:01:26.244Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "CategoryDb.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\CategoryDb.cs",
               "RelativeDocumentMoniker": "Models\\CategoryDb.cs",
@@ -105,24 +89,25 @@
               "RelativeToolTip": "Models\\CategoryDb.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T23:45:48.974Z"
+              "WhenOpened": "2024-10-18T23:45:48.974Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "TabsController.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\TabsController.cs",
               "RelativeDocumentMoniker": "Controllers\\TabsController.cs",
               "ToolTip": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Controllers\\TabsController.cs",
               "RelativeToolTip": "Controllers\\TabsController.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAowJMAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-16T23:03:51.831Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "TabsDb.cs",
               "DocumentMoniker": "E:\\Coding\\Sites\\MyPortfolio\\Backend\\Models\\TabsDb.cs",
               "RelativeDocumentMoniker": "Models\\TabsDb.cs",
@@ -130,8 +115,7 @@
               "RelativeToolTip": "Models\\TabsDb.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T18:37:23.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-18T18:37:23.79Z"
             }
           ]
         }

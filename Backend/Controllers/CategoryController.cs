@@ -73,19 +73,16 @@ namespace Backend.Controllers
             string tabs,
             IFormFile? imageFile)
         {
-            // Basic validation to ensure required fields are provided
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(tabs))
             {
                 return BadRequest("Please fill all required fields.");
             }
 
-            // Parse startDate
             if (!DateOnly.TryParseExact(startDate, "yyyy-MM-dd", out DateOnly parsedStartDate))
             {
                 return BadRequest("Invalid start date format. Use yyyy-MM-dd.");
             }
 
-            // Parse endDate if provided
             DateOnly? parsedEndDate = null;
             if (!string.IsNullOrEmpty(endDate))
             {
@@ -99,7 +96,6 @@ namespace Backend.Controllers
                 }
             }
 
-            // Additional check: Ensure endDate is after startDate, if endDate is provided
             if (parsedEndDate.HasValue && parsedEndDate < parsedStartDate)
             {
                 return BadRequest("End date cannot be before start date.");
@@ -108,7 +104,6 @@ namespace Backend.Controllers
             string? imagePath = null;
             if (imageFile != null)
             {
-                // Define the path to store images under StoredImages/Category
                 var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages", "Category");
                 if (!Directory.Exists(imageFolder))
                 {
@@ -126,8 +121,6 @@ namespace Backend.Controllers
                 imagePath = $"/StoredImages/Category/{uniqueFileName}";
             }
 
-
-            // Create new category entity
             var newCategory = new CategoryDb
             {
                 Title = title,
@@ -139,11 +132,9 @@ namespace Backend.Controllers
                 ImagePath = imagePath
             };
 
-            // Save the new category to the database
             _context.Category.Add(newCategory);
             await _context.SaveChangesAsync();
 
-            // Return the created category details
             return CreatedAtAction(nameof(GetCategory), new { id = newCategory.Id }, newCategory);
         }
 
@@ -161,25 +152,21 @@ namespace Backend.Controllers
                 return NotFound("Category not found.");
             }
 
-            // Define the path to store images under StoredImages/Category
             var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages", "Category");
             if (!Directory.Exists(imageFolder))
             {
                 Directory.CreateDirectory(imageFolder);
             }
 
-            // Generate a unique filename for the image
             var uniqueFileName = $"{Guid.NewGuid()}_{imageFile.FileName}";
             var filePath = Path.Combine(imageFolder, uniqueFileName);
 
-            // Save the file to the server
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await imageFile.CopyToAsync(stream);
             }
 
-            // Update the category with the image path
-            category.ImagePath = $"/StoredImages/Category/{uniqueFileName}"; // Save relative path
+            category.ImagePath = $"/StoredImages/Category/{uniqueFileName}";
             await _context.SaveChangesAsync();
 
             return Ok(new { ImagePath = category.ImagePath });
@@ -255,7 +242,6 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            // Attempt to parse the date string
             if (DateOnly.TryParse(startDateString, out var startDate))
             {
                 if (startDate != DateOnly.MinValue)
@@ -265,7 +251,6 @@ namespace Backend.Controllers
             }
             else
             {
-                // Return a bad request if parsing fails
                 return BadRequest("Invalid date format. Please use YYYY-MM-DD.");
             }
 
@@ -284,15 +269,12 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            // Check if endDateString is null or empty
             if (string.IsNullOrEmpty(endDateString))
             {
-                // Set the EndDate to null
                 category.EndDate = null;
             }
             else
             {
-                // Attempt to parse the date string
                 if (DateOnly.TryParse(endDateString, out var endDate))
                 {
                     category.EndDate = endDate;
@@ -307,7 +289,6 @@ namespace Backend.Controllers
 
             return Ok(category);
         }
-
 
         [HttpPut("EditCategoryTabs")]
         public async Task<IActionResult> EditTabs(int id, string tabs)
