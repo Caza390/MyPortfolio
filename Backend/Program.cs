@@ -1,10 +1,10 @@
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 // Configure CORS
@@ -43,6 +43,12 @@ if (app.Environment.IsDevelopment())
 
 
 // Apply the CORS policy
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "StoredImages")),
+    RequestPath = "/StoredImages"
+});
+
 app.UseCors("AllowFrontendDev");
 
 app.UseHttpsRedirection();

@@ -9,6 +9,7 @@ interface Category {
   url: string;
   startDate: string;
   endDate?: string | null;
+  imagePath?: string;
 }
 
 interface TabsData {
@@ -25,6 +26,8 @@ const tabsData = ref<TabsData | null>(null);
 const loading = ref(true);
 const error = ref('');
 const years = ref<number[]>([]); // Array to store unique sorted years
+const backendBaseUrl = "http://192.168.1.90:5176"; // Backend base URL
+
 
 const fetchCategoriesData = async () => {
   if (!tabsUrl.value) {
@@ -38,9 +41,17 @@ const fetchCategoriesData = async () => {
     if (!response.ok) {
       throw new Error('Failed to fetch categories data');
     }
-    const data = await response.json();
 
-    categoriesData.value = data.sort((a: Category, b: Category) => {
+    const data: Category[] = await response.json();
+
+    // Prepend backendBaseUrl to imagePath if it exists, ensuring no double slashes
+    categoriesData.value = data.map((category: Category) => {
+      if (category.imagePath) {
+        // Remove any leading slash from imagePath to prevent double slashes
+        category.imagePath = `${backendBaseUrl}/${category.imagePath.replace(/^\//, '')}`;
+      }
+      return category;
+    }).sort((a, b) => {
       return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
     });
 
@@ -60,6 +71,7 @@ const fetchCategoriesData = async () => {
     loading.value = false;
   }
 };
+
 
 const fetchTabsData = async () => {
   if (!tabsUrl.value) return;
@@ -134,7 +146,10 @@ watch(() => route.params.tabs, (newTabs) => {
               <li v-for="category in categoriesData.filter(cat => new Date(cat.startDate).getFullYear() === year)"
                 :key="category.id" class="md:flex border border-cz-red-950 rounded-lg p-4 bg-cz-background-700">
 
-                <div
+                <div v-if="category.imagePath" class="md:w-1/4 aspect-ratio-box">
+                  <img :src="category.imagePath" alt="Category Image" class="category-image rounded-lg" />
+                </div>
+                <div v-else
                   class="md:w-1/4 h-24 md:h-24 bg-cz-red-950 bg-opacity-50 md:flex md:items-center md:justify-center text-gray-400">
                   Image
                 </div>
