@@ -11,28 +11,28 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontendDev",
-        builder =>
+        policyBuilder =>
         {
-            builder.WithOrigins("http://localhost:5173", "http://192.168.1.90:5173") // Your frontend's local URL
-                   .AllowAnyHeader()
-                   .AllowAnyMethod()
-                   .AllowCredentials(); // Allow cookies, if needed
+            policyBuilder.WithOrigins("http://localhost:5173", "http://192.168.1.90:5173") // Your frontend's local URL
+                         .AllowAnyHeader()
+                         .AllowAnyMethod()
+                         .AllowCredentials(); // Allow cookies, if needed
         });
 });
 
-// Configure MySQL connection
+// Configure MySQL connection using configuration from appsettings.json and environment variables
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
-options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Swagger/OpenAPI configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Specify the server URL (Railway will use its own port in production, but this is useful for local testing)
 app.Urls.Add("http://0.0.0.0:5176");
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,7 +40,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 // Apply the CORS policy
 app.UseStaticFiles(new StaticFileOptions
