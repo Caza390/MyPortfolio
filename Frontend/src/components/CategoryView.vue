@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, watch, computed, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 
 interface Subcategory {
@@ -29,6 +29,8 @@ const loading = ref(true);
 const error = ref('');
 const uniqueHeadings = ref<string[]>([]);
 const backendBaseUrl = "http://192.168.1.90:5176";
+const isMobile = ref(window.innerWidth < 768);
+const showScrollTopButton = ref(false);
 
 const fetchSubcategoriesData = async () => {
   if (!tabsUrl.value || !categoryUrl.value) {
@@ -118,11 +120,18 @@ const scrollToHeading = (heading: string) => {
   }
 };
 
-console.log('Unique Headings:', uniqueHeadings.value);
+const handleScroll = () => {
+  showScrollTopButton.value = window.scrollY > 100;
+};
 
 onMounted(() => {
   fetchSubcategoriesData();
   fetchCategoryData();
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
 });
 
 watch(
@@ -165,6 +174,11 @@ const groupedSubcategories = computed(() => {
       </ul>
     </aside>
 
+    <button v-show="isMobile && showScrollTopButton" @click="scrollToTop"
+      class="fixed top-20 right-4 bg-cz-red-950 text-cz-red-50 border border-cz-red-900 p-3 rounded-full shadow-lg">
+      ↑ Top
+    </button>
+
     <div class="md:w-5/6 p-4">
       <header v-if="categoryData" class="md:mx-40 text-center">
         <h1 class="text-white text-3xl md:text-5xl">{{ categoryData.title }}</h1>
@@ -192,12 +206,12 @@ const groupedSubcategories = computed(() => {
                 </div>
 
                 <div class="mt-4 md:mt-0 md:ml-4 md:w-3/4">
-                  <h3 class="md:text-2xl text-white">{{ subcategory.title }}</h3>
+                  <h3 class="text-xl md:text-2xl text-white">{{ subcategory.title }}</h3>
                   <p class="text-cz-red-700 text-sm md:text-base text-opacity-50">
                     <span v-if="subcategory.startDate">{{ subcategory.startDate }}</span>
                     <span v-if="subcategory.endDate"> - {{ subcategory.endDate }}</span>
                   </p>
-                  <p class="text-gray-300">{{ subcategory.description }}</p>
+                  <p class="text-gray-300 mt-2 md:mt-0">{{ subcategory.description }}</p>
                 </div>
               </li>
             </ul>
