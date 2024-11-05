@@ -18,7 +18,8 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="StoredImages\" />
+    <Folder Include="StoredImages\Category\" />
+    <Folder Include="StoredImages\Subcategory\" />
   </ItemGroup>
 
 </Project>

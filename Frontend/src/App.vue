@@ -4,6 +4,7 @@ import { RouterLink, RouterView, useRoute } from 'vue-router';
 import pdfPath from '@/assets/Callum_Carter-Begbie_CV.pdf';
 
 const isDropdownOpen = ref(false);
+
 const openPdf = () => {
   window.open(pdfPath, '_blank');
 };

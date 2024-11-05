@@ -101,7 +101,7 @@ namespace Backend.Controllers
             string? imagePath = null;
             if (imageFile != null)
             {
-                var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages");
+                var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages", "Subcategory");
                 if (!Directory.Exists(imageFolder))
                 {
                     Directory.CreateDirectory(imageFolder);
@@ -115,7 +115,7 @@ namespace Backend.Controllers
                     await imageFile.CopyToAsync(stream);
                 }
 
-                imagePath = $"/StoredImages/{uniqueFileName}";
+                imagePath = $"/StoredImages/Subcategory/{uniqueFileName}";
             }
 
             var newSubcategory = new SubcategoryDb
@@ -168,7 +168,6 @@ namespace Backend.Controllers
 
             return Ok(new { ImagePath = subcategory.ImagePath });
         }
-
 
         [HttpPut("EditSubcategoryHeading")]
         public async Task<IActionResult> EditHeading(int id, string heading)
@@ -291,7 +290,6 @@ namespace Backend.Controllers
 
             return Ok(subcategory);
         }
-
 
         [HttpPut("EditSubategoryCategory")]
         public async Task<IActionResult> EditCategory(int id, string category)
